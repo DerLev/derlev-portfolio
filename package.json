@@ -15,6 +15,8 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
+    "@sanity/client": "^2.19.0",
+    "@sanity/image-url": "^1.0.1",
     "@tailwindcss/typography": "^0.4.1",
     "@types/react": "17.0.22",
     "autoprefixer": "^10.3.4",

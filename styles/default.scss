@@ -9,3 +9,7 @@ nav .link {
     @apply bg-gray-900 text-white;
   }
 }
+
+.bg-img, .fg-text {
+  grid-area: 1 / 1 / 2 / 2;
+}
