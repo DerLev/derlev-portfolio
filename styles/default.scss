@@ -13,3 +13,11 @@ nav .link {
 .bg-img, .fg-text {
   grid-area: 1 / 1 / 2 / 2;
 }
+
+.title-shadow {
+  text-shadow: 0 0 1rem #000;
+}
+
+.description-shadow {
+  text-shadow: 0 0 .5rem #00000055;
+}
