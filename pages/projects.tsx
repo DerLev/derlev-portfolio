@@ -1,29 +1,12 @@
 import { useEffect, useState } from 'react'
-import type { NextPage } from 'next'
+import type { NextPage, GetServerSideProps } from 'next'
 import Image from 'next/image'
 import client, { urlFor } from '../components/sanityClient'
 import { ClockIcon, CodeIcon, CheckIcon, ArchiveIcon } from '@heroicons/react/outline'
 import BlockContent from '@sanity/block-content-to-react'
 
-const Projects: NextPage = () => {
-  const [data, setData] = useState<any>(null);
-
-  useEffect(() => {
-    client.fetch(`
-      *[_type == "project"]{
-        _id,
-        title,
-        status,
-        url,
-        mainImage,
-        description,
-        author->{
-          name,
-          image
-        }
-      }
-    `).then((data) => { setData(data); console.log(data); });
-  }, [])
+const Projects: NextPage = ({ projects }: any) => {
+  const [data, setData] = useState<any>(projects);
 
   return (
     <>
@@ -32,7 +15,7 @@ const Projects: NextPage = () => {
           data && data.map((project:any) => (
             <div key={project._id} className="w-full px-2 py-1 relative grid">
               <div className="bg-img" style={{ marginBottom: -5.40 }}>
-                <Image src={urlFor(project.mainImage).width(400).height(230).url()} width={400} height={230} className="rounded-lg" />
+                <Image src={urlFor(project.mainImage).width(400).height(230).url()} width={400} height={230} className="rounded-lg" alt="Project Image" />
               </div>
               <div className="fg-text z-10 rounded-lg bg-gray-600 grid p-1 group" style={{ background: "linear-gradient(180deg, rgba(75,85,99,0) 50%, rgba(75,85,99,1) 100%)", gridTemplateRows: '2fr 1fr' }}>
                 <div className="flex justify-center items-center flex-col gap-1">
@@ -80,7 +63,7 @@ const Projects: NextPage = () => {
                     })()
                   }
                   <div className="flex items-center gap-1">
-                    <Image src={urlFor(project.author.image).width(32).height(32).url()} width={16} height={16} className="rounded-full" />
+                    <Image src={urlFor(project.author.image).width(32).height(32).url()} width={16} height={16} className="rounded-full" alt="Author Image" />
                     <span>{project.author.name}</span>
                   </div>
                   {
@@ -103,3 +86,27 @@ const Projects: NextPage = () => {
 }
 
 export default Projects
+
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const data = await client.fetch(`
+  *[_type == "project"]{
+    _id,
+    title,
+    status,
+    url,
+    mainImage,
+    description,
+    author->{
+      name,
+      image
+    }
+  }
+`);
+
+  return {
+    props: {
+      projects: data
+    }
+  }
+}
