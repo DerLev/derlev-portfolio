@@ -1,3 +1,5 @@
+import rs from 'randomstring';
+
 export default {
   name: 'post',
   title: 'Post',
@@ -15,8 +17,8 @@ export default {
       description: 'URL of the post',
       type: 'slug',
       options: {
-        source: 'title',
-        maxLength: 96,
+        source: () => rs.generate({ length: 12, readable: true, charset: 'alphanumeric', capitalization: 'lowercase' }),
+        maxLength: 32
       },
       validation: Rule => Rule.required(),
     },

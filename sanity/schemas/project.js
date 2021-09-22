@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export default {
   name: 'project',
   title: 'Project',
@@ -22,6 +24,15 @@ export default {
         ]
       },
       validation: Rule => Rule.required(),
+    },
+    {
+      name: 'private',
+      title: 'Private',
+      description: 'Whether the project is private',
+      type: 'boolean',
+      options: {
+        layout: 'checkbox',
+      },
     },
     {
       name: 'author',
@@ -55,7 +66,25 @@ export default {
       name: 'url',
       title: 'GitHub URL',
       type: 'url',
-    }
+      hidden: ({document}) => document?.private
+    },
+    {
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [
+        { type: 'string' }
+      ],
+      options: {
+        layout: 'tags'
+      }
+    },
+    {
+      name: 'publishedAt',
+      title: 'Published at',
+      type: 'date',
+      validation: Rule => Rule.required(),
+    },
   ],
 
   preview: {
@@ -71,4 +100,9 @@ export default {
       })
     },
   },
+
+  initialValue: () => ({
+    publishedAt: moment().format('YYYY-MM-DD'),
+    private: false,
+  })
 }
