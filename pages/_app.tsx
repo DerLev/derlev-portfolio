@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </div>
       </main>
       <footer className="bg-gray-900 flex-grow-0 flex items-center justify-center text-gray-400 font-light py-1">
-        <div className="max-w-7xl w-full flex justify-between items-center">
+        <div className="max-w-7xl w-full flex justify-between items-center px-4">
           <span>&copy; DerLev { moment().format('yyyy') }</span>
           <a href="https://github.com/DerLev/derlev-portfolio" rel="noopener noreferrer" target="_blank" className="flex items-center gap-1">
             <CodeIcon className="w-5 h-5 inline-block" />

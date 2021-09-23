@@ -1,5 +1,5 @@
 html, body {
-  @apply w-screen min-h-screen bg-gray-900 text-white;
+  @apply w-screen min-h-screen bg-gray-900 text-white overflow-x-hidden;
 }
 
 nav .link {
@@ -19,7 +19,7 @@ nav .link {
 }
 
 .description-shadow {
-  text-shadow: 0 0 .5rem #00000055;
+  text-shadow: 0 0 .5rem #000000;
 }
 
 .text-shadow {
