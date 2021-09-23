@@ -1,5 +1,5 @@
 import { Fragment, useState } from 'react'
-import type { NextPage, GetServerSideProps } from 'next'
+import type { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next'
 import Image from 'next/image'
 import client, { urlFor } from '../components/sanityClient'
 import { ClockIcon, CodeIcon, CheckIcon, ArchiveIcon, LockClosedIcon, SelectorIcon } from '@heroicons/react/outline'
@@ -13,112 +13,82 @@ const sortings = [
   { type: 'status', variant: 'desc', title: 'Status - Archived to Pending' },
 ];
 
-const Projects: NextPage = ({ projects }: any) => {
+const sortDate = (data: any, asc?: boolean) => {
+  const sortedData = [...data].sort(function (a:any, b:any) {
+    var dateA = new Date(a.publishedAt).getTime();
+    var dateB = new Date(b.publishedAt).getTime();
+    if(asc === true) return dateA > dateB ? 1 : -1;
+    return dateA < dateB ? 1 : -1;
+  });
+  return sortedData
+}
+
+const sortStatus = (data: any, asc?: boolean) => {
+  const sortedData = [...data].sort(function (a:any, b:any) {
+    var statusA = 0
+    function aFunc() {
+      switch (a.status) {
+        case 'pending':
+          statusA = 0;
+          break;
+        case 'dev':
+          statusA = 1;
+          break;
+        case 'done':
+          statusA = 2;
+          break;
+        case 'archive':
+          statusA = 3;
+          break;
+      }
+    }
+    aFunc();
+    var statusB = 0
+    function bFunc() {
+      switch (b.status) {
+        case 'pending':
+          statusB = 0;
+          break;
+        case 'dev':
+          statusB = 1;
+          break;
+        case 'done':
+          statusB = 2;
+          break;
+        case 'archive':
+          statusB = 3;
+          break;
+      }
+    }
+    bFunc();
+    if(asc === true) return statusA > statusB ? 1 : -1;
+    return statusA < statusB ? 1 : -1;
+  });
+  return sortedData;
+}
+
+const Projects: NextPage = ({ projects }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [data, setData] = useState<any>(projects);
   const [sorting, setSorting] = useState<any>(sortings[0]);
 
   const sort = (d:any) => {
     if(d.type === 'date') {
       if(d.variant === 'asc') {
-        const sortedData = [...data].sort(function (a:any, b:any) {
-          var dateA = new Date(a.publishedAt).getTime();
-          var dateB = new Date(b.publishedAt).getTime();
-          return dateA > dateB ? 1 : -1;
-        });
+        const sortedData = sortDate(data, true);
         setData(sortedData);
       }
       if(d.variant === 'desc') {
-        const sortedData = [...data].sort(function (a:any, b:any) {
-          var dateA = new Date(a.publishedAt).getTime();
-          var dateB = new Date(b.publishedAt).getTime();
-          return dateA < dateB ? 1 : -1;
-        });
+        const sortedData = sortDate(data);
         setData(sortedData);
       }
     }
     if(d.type === 'status') {
       if(d.variant === 'asc') {
-        const sortedData = [...data].sort(function (a:any, b:any) {
-          var statusA = 0
-          function aFunc() {
-            switch (a.status) {
-              case 'pending':
-                statusA = 0;
-                break;
-              case 'dev':
-                statusA = 1;
-                break;
-              case 'done':
-                statusA = 2;
-                break;
-              case 'archive':
-                statusA = 3;
-                break;
-            }
-          }
-          aFunc();
-          var statusB = 0
-          function bFunc() {
-            switch (b.status) {
-              case 'pending':
-                statusB = 0;
-                break;
-              case 'dev':
-                statusB = 1;
-                break;
-              case 'done':
-                statusB = 2;
-                break;
-              case 'archive':
-                statusB = 3;
-                break;
-            }
-          }
-          bFunc();
-          return statusA > statusB ? 1 : -1;
-        });
+        const sortedData = sortStatus(data, true);
         setData(sortedData);
       }
       if(d.variant === 'desc') {
-        const sortedData = [...data].sort(function (a:any, b:any) {
-          var statusA = 0
-          function aFunc() {
-            switch (a.status) {
-              case 'pending':
-                statusA = 0;
-                break;
-              case 'dev':
-                statusA = 1;
-                break;
-              case 'done':
-                statusA = 2;
-                break;
-              case 'archive':
-                statusA = 3;
-                break;
-            }
-          }
-          aFunc();
-          var statusB = 0
-          function bFunc() {
-            switch (b.status) {
-              case 'pending':
-                statusB = 0;
-                break;
-              case 'dev':
-                statusB = 1;
-                break;
-              case 'done':
-                statusB = 2;
-                break;
-              case 'archive':
-                statusB = 3;
-                break;
-            }
-          }
-          bFunc();
-          return statusA < statusB ? 1 : -1;
-        });
+        const sortedData = sortStatus(data);
         setData(sortedData);
       }
     }
@@ -240,7 +210,7 @@ const Projects: NextPage = ({ projects }: any) => {
 export default Projects
 
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export const getStaticProps: GetStaticProps = async (ctx) => {
   const data = await client.fetch(`
   *[_type == "project"]{
     _id,
@@ -259,15 +229,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   }
 `);
 
-  const sortedData = data.sort(function (a:any, b:any) {
-    var dateA = new Date(a.publishedAt).getTime();
-    var dateB = new Date(b.publishedAt).getTime();
-    return dateA < dateB ? 1 : -1;
-  });
+  const sortedData = sortDate(data);
 
   return {
     props: {
-      projects: data
-    }
+      projects: sortedData
+    },
+
+    revalidate: 60 * 30
   }
 }
