@@ -4,7 +4,7 @@ import Image from 'next/image'
 import client, { urlFor } from '../components/sanityClient'
 import { ClockIcon, CodeIcon, CheckIcon, ArchiveIcon, LockClosedIcon, SelectorIcon } from '@heroicons/react/outline'
 import BlockContent from '@sanity/block-content-to-react'
-import { Listbox } from '@headlessui/react'
+import { Listbox, Dialog, Transition } from '@headlessui/react'
 
 const sortings = [
   { type: 'date', variant: 'desc', title: 'Date - New to Old' },
@@ -25,42 +25,22 @@ const sortDate = (data: any, asc?: boolean) => {
 
 const sortStatus = (data: any, asc?: boolean) => {
   const sortedData = [...data].sort(function (a:any, b:any) {
-    var statusA = 0
-    function aFunc() {
+    function resFunc(a:any) {
       switch (a.status) {
         case 'pending':
-          statusA = 0;
-          break;
+          return 0;
         case 'dev':
-          statusA = 1;
-          break;
+          return 1;
         case 'done':
-          statusA = 2;
-          break;
+          return 2;
         case 'archive':
-          statusA = 3;
-          break;
+          return 3;
+        default:
+          return 4;
       }
     }
-    aFunc();
-    var statusB = 0
-    function bFunc() {
-      switch (b.status) {
-        case 'pending':
-          statusB = 0;
-          break;
-        case 'dev':
-          statusB = 1;
-          break;
-        case 'done':
-          statusB = 2;
-          break;
-        case 'archive':
-          statusB = 3;
-          break;
-      }
-    }
-    bFunc();
+    var statusA = resFunc(a);
+    var statusB = resFunc(b);
     if(asc === true) return statusA > statusB ? 1 : -1;
     return statusA < statusB ? 1 : -1;
   });
@@ -70,6 +50,8 @@ const sortStatus = (data: any, asc?: boolean) => {
 const Projects: NextPage = ({ projects }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [data, setData] = useState<any>(projects);
   const [sorting, setSorting] = useState<any>(sortings[0]);
+  const [modalOpen, setModalOpen] = useState<boolean>(true);
+  const [modalObject, setModalObject] = useState(projects[0]);
 
   const sort = (d:any) => {
     if(d.type === 'date') {
@@ -97,6 +79,40 @@ const Projects: NextPage = ({ projects }: InferGetStaticPropsType<typeof getStat
 
   return (
     <>
+      <Transition show={modalOpen} as={Fragment}>
+        <Dialog onClose={() => setModalOpen(false)} className="fixed z-10 inset-0 overflow-y-auto">
+          <div className="flex items-center justify-center min-h-screen">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
+            </Transition.Child>
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+              <div className="relative bg-white rounded max-w-sm mx-auto text-gray-800">
+                <h1>{modalObject.title}</h1>
+                {
+                  modalObject.description &&
+                  <BlockContent blocks={modalObject.description[0]} />
+                }
+              </div>
+            </Transition.Child>
+          </div>
+        </Dialog>
+      </Transition>
       <h1 className="text-center text-3xl mb-6 font-semibold">My projects</h1>
       <div className="flex items-center justify-end gap-2 relative mb-4 px-6">
         <span>Sort by:</span>
