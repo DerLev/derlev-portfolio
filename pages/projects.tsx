@@ -5,6 +5,7 @@ import client, { urlFor } from '../components/sanityClient'
 import { ClockIcon, CodeIcon, CheckIcon, ArchiveIcon, LockClosedIcon, SelectorIcon } from '@heroicons/react/outline'
 import BlockContent from '@sanity/block-content-to-react'
 import { Listbox, Dialog, Transition } from '@headlessui/react'
+import { NextSeo } from 'next-seo'
 
 const sortings = [
   { type: 'date', variant: 'desc', title: 'Date - New to Old' },
@@ -84,6 +85,13 @@ const Projects: NextPage = ({ projects }: InferGetStaticPropsType<typeof getStat
 
   return (
     <>
+      <NextSeo
+        title="Projects"
+        description="Here is a list of my projects I am working on, or have been working on"
+        openGraph={{
+          url: process.env.rootUrl + 'projects'
+        }}
+      />
       <Transition show={modalOpen} as={Fragment}>
         <Dialog onClose={() => setModalOpen(false)} className="fixed z-10 inset-0 overflow-y-auto">
           <div className="flex items-center justify-center min-h-screen">

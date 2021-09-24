@@ -5,4 +5,7 @@ module.exports = {
   images: {
     domains: ['cdn.sanity.io'],
   },
+  env: {
+    rootUrl: 'https://derlev.mc-mineserver.de/',
+  },
 }
