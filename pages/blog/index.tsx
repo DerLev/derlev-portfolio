@@ -1,5 +1,5 @@
 import type { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next'
-import client, { urlFor } from '../components/sanityClient'
+import client, { urlFor } from '../../components/sanityClient'
 import { NextSeo } from 'next-seo'
 import Image from 'next/image'
 import moment from 'moment'
@@ -26,7 +26,7 @@ const Blog: NextPage = ({ posts }: InferGetStaticPropsType<typeof getStaticProps
                   <Image src={urlFor(post.mainImage).width(1280).height(128).url()} width={1280} height={128} layout="fixed" />
                 </div>
               </div>
-              <div className="fg-text z-10 rounded-lg flex flex-col md:flex-row justify-between items-center p-2 group relative" style={{ backgroundColor: 'rgba(0,0,0,0.25)' }}>
+              <div className="fg-text z-10 rounded-lg flex flex-col md:flex-row justify-between items-center p-2 group relative bg-black bg-opacity-20">
                 <div className="transform md:origin-left group-hover:scale-125 transition-all">
                   <h1 className="text-2xl font-semibold">{post.title}</h1>
                 </div>
