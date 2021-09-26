@@ -7,5 +7,6 @@ module.exports = {
   },
   env: {
     rootUrl: 'https://derlev.mc-mineserver.de/',
+    buildDate: new Date().toISOString(),
   },
 }
