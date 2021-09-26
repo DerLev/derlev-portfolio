@@ -27,7 +27,6 @@ function MyApp({ Component, pageProps }: AppProps) {
             <span>&copy; DerLev { moment().format('yyyy') }</span>
             <a href="https://github.com/DerLev/derlev-portfolio" rel="noopener noreferrer" target="_blank" className="flex items-center gap-1">
               <CodeIcon className="w-5 h-5 inline-block" />
-              <span>GitHub Repo</span>
             </a>
           </div>
         </footer>
