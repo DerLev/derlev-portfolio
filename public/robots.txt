@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://derlev.mc-mineserver.de/sitemap.xml
