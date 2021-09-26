@@ -36,6 +36,7 @@ export default {
       options: {
         hotspot: true,
       },
+      validation: Rule => Rule.required(),
     },
     {
       name: 'publishedAt',
@@ -47,6 +48,7 @@ export default {
       name: 'body',
       title: 'Body',
       type: 'blockContent',
+      validation: Rule => Rule.required(),
     },
   ],
 
