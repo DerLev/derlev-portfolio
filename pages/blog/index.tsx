@@ -78,6 +78,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
       posts: sortedData
     },
 
-    revalidate: 60 * 30,
+    revalidate: 60 * 15,
   };
 }
