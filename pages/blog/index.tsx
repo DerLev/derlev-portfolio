@@ -20,7 +20,7 @@ const Blog: NextPage = ({ posts }: InferGetStaticPropsType<typeof getStaticProps
       <div className="grid grid-cols-1 gap-2">
         {
           posts.map((post:any) => (
-            <div className="grid shadow-md" key={post._id}>
+            <div className="grid shadow-md rounded-lg" key={post._id}>
               <div className="bg-img overflow-hidden relative h-28 md:h-20 rounded-lg">
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 filter blur-sm">
                   <Image src={urlFor(post.mainImage).width(1280).height(128).url()} width={1280} height={128} layout="fixed" alt="Post Main Image" />
@@ -43,6 +43,20 @@ const Blog: NextPage = ({ posts }: InferGetStaticPropsType<typeof getStaticProps
               </div>
             </div>
           ))
+        }
+        {
+          !posts[0] &&
+          <div className="grid shadow-md rounded-lg">
+            <div className="bg-img overflow-hidden relative h-28 md:h-20 rounded-lg bg-gray-700"></div>
+            <div className="fg-text z-10 rounded-lg flex justify-center items-center p-2 group relative bg-black bg-opacity-20">
+              <div className="transform group-hover:scale-125 transition-all">
+                <h1 className="text-2xl font-semibold">No posts yet</h1>
+              </div>
+              <Link href="/blog">
+                <a className="flex-none absolute top-0 left-0 bottom-0 right-0"></a>
+              </Link>
+            </div>
+          </div>
         }
       </div>
     </>
