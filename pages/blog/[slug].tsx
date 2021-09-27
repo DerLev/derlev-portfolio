@@ -175,6 +175,12 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     }
   `);
 
+  if(!data[0]) {
+    return {
+      notFound: true
+    }
+  }
+
   return {
     props: {
       post: data[0]
