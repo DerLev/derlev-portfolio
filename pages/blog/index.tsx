@@ -23,7 +23,7 @@ const Blog: NextPage = ({ posts }: InferGetStaticPropsType<typeof getStaticProps
             <div className="grid shadow-md" key={post._id}>
               <div className="bg-img overflow-hidden relative h-28 md:h-20 rounded-lg">
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 filter blur-sm">
-                  <Image src={urlFor(post.mainImage).width(1280).height(128).url()} width={1280} height={128} layout="fixed" />
+                  <Image src={urlFor(post.mainImage).width(1280).height(128).url()} width={1280} height={128} layout="fixed" alt="Post Main Image" />
                 </div>
               </div>
               <div className="fg-text z-10 rounded-lg flex flex-col md:flex-row justify-between items-center p-2 group relative bg-black bg-opacity-20">
@@ -32,7 +32,7 @@ const Blog: NextPage = ({ posts }: InferGetStaticPropsType<typeof getStaticProps
                 </div>
                 <div className="md:text-right transform md:origin-right group-hover:scale-105 transition-all">
                   <div className="flex items-center justify-center md:justify-end gap-1">
-                    <Image src={urlFor(post.author.image).width(64).height(64).url()} width={16} height={16} className="rounded-full" />
+                    <Image src={urlFor(post.author.image).width(64).height(64).url()} width={16} height={16} className="rounded-full" alt={`${post.author.name}'s picture'`} />
                     <span>{post.author.name}</span>
                   </div>
                   <p>{moment(post.publishedAt).format('HH:mm DD.MM.YYYY')}</p>

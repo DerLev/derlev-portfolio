@@ -103,7 +103,7 @@ const imageSerializer = (props: any) => {
   console.log(props);
   return (
     <div className="mb-3 mt-1 shadow-md">
-      <Image src={urlFor(props.node.asset).width(1920).height(1080).url()} width={1920} height={1080} layout="responsive" className="rounded" />
+      <Image src={urlFor(props.node.asset).width(1920).height(1080).url()} width={1920} height={1080} layout="responsive" className="rounded" alt="Image" />
     </div>
   )
 }
@@ -133,13 +133,13 @@ const BlogPost: NextPage = ({ post }: InferGetStaticPropsType<typeof getStaticPr
       <div className="grid">
         <div className="bg-img h-48 overflow-hidden relative rounded-2xl">
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <Image src={urlFor(post.mainImage).width(1280).height(208).url()} width={1280} height={208} layout="fixed" />
+            <Image src={urlFor(post.mainImage).width(1280).height(208).url()} width={1280} height={208} layout="fixed" alt="Main Image" />
           </div>
         </div>
         <div className="fg-text flex flex-col items-center justify-center gap-2 z-10 bg-black bg-opacity-20 rounded-2xl">
           <h1 className="text-4xl font-semibold title-shadow">{post.title}</h1>
           <div className="text-xl flex items-center gap-1 title-shadow">
-            <Image src={urlFor(post.author.image).width(96).height(96).url()} width={24} height={24} layout="fixed" className="rounded-full shadow-md" />
+            <Image src={urlFor(post.author.image).width(96).height(96).url()} width={24} height={24} layout="fixed" className="rounded-full shadow-md" alt={`${post.author.name}'s picture'`} />
             <span>{post.author.name}</span>
           </div>
           <p className="description-shadow">{weekDay(Number(moment(post.publishedAt).format('E')))} {moment(post.publishedAt).format('DD.MM.YYYY')}</p>
