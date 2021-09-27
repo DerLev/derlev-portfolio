@@ -11,7 +11,5 @@ module.exports = {
       scale: ['group-hover'],
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-  ],
+  plugins: [],
 }
