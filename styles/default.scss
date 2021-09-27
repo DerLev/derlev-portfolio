@@ -31,3 +31,8 @@ nav .link {
   height: 100%;
   object-fit: cover;
 }
+
+::selection {
+  background-color: theme('colors.indigo.500');
+  color: theme('colors.white');
+}
