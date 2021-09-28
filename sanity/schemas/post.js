@@ -50,6 +50,12 @@ export default {
       type: 'blockContent',
       validation: Rule => Rule.required(),
     },
+    {
+      name: 'project',
+      title: 'Assosiated Project',
+      type: 'reference',
+      to: {type: 'project'},
+    },
   ],
 
   preview: {

@@ -16,23 +16,11 @@ export default {
       options: {
         hotspot: true,
       },
-    },
-    {
-      name: 'bio',
-      title: 'Bio',
-      type: 'array',
-      of: [
-        {
-          title: 'Block',
-          type: 'block',
-          styles: [{title: 'Normal', value: 'normal'}],
-          lists: [],
-        },
-      ],
+      validation: Rule => Rule.required(),
     },
     {
       name: 'ghUrl',
-      title: 'GitHub Profile URL',
+      title: 'GitHub Profile',
       type: 'url',
       validation: Rule => Rule.required(),
     }
