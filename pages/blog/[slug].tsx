@@ -208,7 +208,7 @@ export default BlogPost;
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const data = await client.fetch(`
-    *[slug.current == "${ctx.params?.slug}" && publish == true]{
+    *[slug.current == "${ctx.params?.slug}" ${ process.env.NODE_ENV === 'development' ? '' : '&& publish == true'}]{
       author->{
         name,
         image,
