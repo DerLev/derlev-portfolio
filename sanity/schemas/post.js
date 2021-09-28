@@ -1,8 +1,10 @@
 import rs from 'randomstring';
+import { HiOutlineRss } from 'react-icons/hi'
 
 export default {
   name: 'post',
   title: 'Post',
+  icon: HiOutlineRss,
   type: 'document',
   fields: [
     {

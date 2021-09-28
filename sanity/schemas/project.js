@@ -1,8 +1,10 @@
 import moment from 'moment';
+import { HiOutlineCode } from 'react-icons/hi';
 
 export default {
   name: 'project',
   title: 'Project',
+  icon: HiOutlineCode,
   type: 'document',
   fields: [
     {

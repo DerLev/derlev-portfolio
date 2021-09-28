@@ -1,6 +1,9 @@
+import { HiOutlineUser } from "react-icons/hi"
+
 export default {
   name: 'author',
   title: 'Author',
+  icon: HiOutlineUser,
   type: 'document',
   fields: [
     {
