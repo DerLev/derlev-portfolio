@@ -23,6 +23,21 @@ export default {
       validation: Rule => Rule.required(),
     },
     {
+      name: 'publishedAt',
+      title: 'Published at',
+      type: 'datetime',
+      validation: Rule => Rule.required(),
+    },
+    {
+      name: 'publish',
+      title: 'Publish',
+      description: 'Whether the post should be publicly availible',
+      type: 'boolean',
+      options: {
+        layout: 'checkbox',
+      },
+    },
+    {
       name: 'author',
       title: 'Author',
       type: 'reference',
@@ -36,12 +51,6 @@ export default {
       options: {
         hotspot: true,
       },
-      validation: Rule => Rule.required(),
-    },
-    {
-      name: 'publishedAt',
-      title: 'Published at',
-      type: 'datetime',
       validation: Rule => Rule.required(),
     },
     {
@@ -73,6 +82,7 @@ export default {
   },
 
   initialValue: () => ({
-    publishedAt: (new Date()).toISOString()
+    publishedAt: (new Date()).toISOString(),
+    publish: false
   })
 }

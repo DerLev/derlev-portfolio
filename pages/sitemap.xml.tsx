@@ -38,7 +38,7 @@ export const getServerSideProps = async ({ res }: any) => {
   })
 
   const blogPosts = await client.fetch(`
-    *[_type == "post"]{
+    *[_type == "post" && publish == true]{
       slug,
       _updatedAt
     }

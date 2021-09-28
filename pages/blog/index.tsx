@@ -67,7 +67,7 @@ export default Blog
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const data = await client.fetch(`
-    *[_type == "post"]{
+    *[_type == "post" && publish == true]{
       _id,
       author->{
         name,
