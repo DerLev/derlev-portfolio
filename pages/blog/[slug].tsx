@@ -138,9 +138,15 @@ const BlogPost: NextPage = ({ post }: InferGetStaticPropsType<typeof getStaticPr
             <Image src={urlFor(post.mainImage).width(1280).height(208).url()} width={1280} height={208} layout="fixed" alt="Main Image" />
           </div>
         </div>
-        <div className="fg-text flex flex-col items-center justify-center gap-2 z-10 bg-black bg-opacity-20 rounded-2xl">
+        <div className="fg-text flex flex-col items-center justify-center gap-2 z-10 bg-black bg-opacity-20 rounded-2xl relative">
           <h1 className="text-4xl font-semibold title-shadow">{post.title}</h1>
           <p className="description-shadow">{weekDay(Number(moment(post.publishedAt).format('E')))} {moment(post.publishedAt).format('DD.MM.YYYY')}</p>
+          {
+            post.copyright &&
+            <div className="flex-none absolute bottom-0 right-2 text-right">
+              <a href={post.copyUrl} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-gray-200 transition description-shadow text-xs font-light">&copy; {post.copyBy}</a>
+            </div>
+          }
         </div>
       </div>
       <article className="px-5 py-3">
@@ -225,7 +231,10 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
         title,
         private,
         url
-      }
+      },
+      copyright,
+      copyBy,
+      copyUrl
     }
   `);
 
