@@ -54,6 +54,27 @@ export default {
       validation: Rule => Rule.required(),
     },
     {
+      name: 'copyright',
+      title: 'Image Copyright',
+      description: 'Activites fields to type in copyright licenses',
+      type: 'boolean',
+      options: {
+        layout: 'checkbox',
+      },
+    },
+    {
+      name: 'copyBy',
+      title: 'Copyright By',
+      type: 'string',
+      hidden: ({document}) => !document?.copyright
+    },
+    {
+      name: 'copyUrl',
+      title: 'Copyright Url',
+      type: 'url',
+      hidden: ({document}) => !document?.copyright
+    },
+    {
       name: 'body',
       title: 'Body',
       type: 'blockContent',
@@ -83,6 +104,7 @@ export default {
 
   initialValue: () => ({
     publishedAt: (new Date()).toISOString(),
-    publish: false
+    publish: false,
+    copyright: false,
   })
 }
