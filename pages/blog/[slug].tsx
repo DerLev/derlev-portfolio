@@ -1,9 +1,11 @@
 import { NextPage, GetStaticProps, InferGetStaticPropsType, GetStaticPaths } from "next"
-import client, { urlFor, config as clientConfig } from '../../components/sanityClient'
+import client, { urlFor } from '../../components/sanityClient'
 import { NextSeo } from "next-seo"
 import Image from 'next/image'
 import moment from "moment"
 import BlockContent from '@sanity/block-content-to-react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTwitter, faInstagram, faDiscord, faGithub } from '@fortawesome/free-brands-svg-icons'
 
 const weekDay = (wd:number) => {
   switch (wd) {
@@ -130,7 +132,7 @@ const BlogPost: NextPage = ({ post }: InferGetStaticPropsType<typeof getStaticPr
           ]
         }}
       />
-      <div className="grid">
+      <div className="grid rounded-2xl shadow-lg">
         <div className="bg-img h-48 overflow-hidden relative rounded-2xl">
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <Image src={urlFor(post.mainImage).width(1280).height(208).url()} width={1280} height={208} layout="fixed" alt="Main Image" />
@@ -138,10 +140,6 @@ const BlogPost: NextPage = ({ post }: InferGetStaticPropsType<typeof getStaticPr
         </div>
         <div className="fg-text flex flex-col items-center justify-center gap-2 z-10 bg-black bg-opacity-20 rounded-2xl">
           <h1 className="text-4xl font-semibold title-shadow">{post.title}</h1>
-          <div className="text-xl flex items-center gap-1 title-shadow">
-            <Image src={urlFor(post.author.image).width(96).height(96).url()} width={24} height={24} layout="fixed" className="rounded-full shadow-md" alt={`${post.author.name}'s picture'`} />
-            <span>{post.author.name}</span>
-          </div>
           <p className="description-shadow">{weekDay(Number(moment(post.publishedAt).format('E')))} {moment(post.publishedAt).format('DD.MM.YYYY')}</p>
         </div>
       </div>
@@ -153,6 +151,55 @@ const BlogPost: NextPage = ({ post }: InferGetStaticPropsType<typeof getStaticPr
           listItem: listItemSerializer
         }} />
       </article>
+      <div className="mt-4 mb-2 grid md:grid-cols-2 gap-4">
+        <div className="bg-gray-800 py-3 px-2 rounded-lg flex justify-between shadow-lg">
+          <div className="flex items-center gap-1 text-3xl">
+            <Image src={urlFor(post.author.image).width(144).height(144).url()} width={36} height={36} layout="fixed" className="rounded-full shadow-md" alt={`${post.author.name}'s picture'`} />
+            <span>{post.author.name}</span>
+          </div>
+          <div className="flex items-center">
+            {
+              post.author.ghUrl &&
+              <a href={post.author.ghUrl} rel="noopener noreferrer" target="_blank" className="flex items-center gap-1 text-indigo-300 hover:text-indigo-200 transition">
+                <FontAwesomeIcon icon={faGithub} className="w-4 h-4" />
+                <span>GitHub</span>
+              </a>
+            }
+          </div>
+        </div>
+        {
+          post.project &&
+          <div className="grid shadow-lg rounded-lg">
+            <div className="bg-img overflow-hidden relative rounded-lg h-16">
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <Image src={urlFor(post.project.mainImage).width(735).height(70).url()} width={735} height={70} layout="fixed" alt="Project Image" />
+              </div>
+            </div>
+            <div className="fg-text py-3 px-2 flex items-center justify-between rounded-lg z-10">
+              <div className="title-shadow">
+                <span className="text-3xl">{post.project.title}</span>
+              </div>
+              <div className="description-shadow">
+                {
+                  post.project.url && !post.project.private &&
+                  <a href={post.project.url} rel="noopener noreferrer" target="_blank" className="flex items-center gap-1 text-indigo-300 hover:text-indigo-200 transition">
+                    <FontAwesomeIcon icon={faGithub} className="w-4 h-4 shadow bg-black rounded-full bg-opacity-20" />
+                    <span>GitHub</span>
+                  </a>
+                }
+              </div>
+            </div>
+          </div>
+        }
+        {
+          !post.project &&
+          <div className="bg-gray-800 py-3 px-2 rounded-lg shadow-lg">
+            <div className="flex items-center">
+              <span className="text-3xl">No associated project</span>
+            </div>
+          </div>
+        }
+      </div>
     </>
   )
 }
@@ -164,14 +211,21 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     *[slug.current == "${ctx.params?.slug}"]{
       author->{
         name,
-        image
+        image,
+        ghUrl
       },
       body,
       mainImage,
       publishedAt,
       title,
       slug,
-      _updatedAt
+      _updatedAt,
+      project->{
+        mainImage,
+        title,
+        private,
+        url
+      }
     }
   `);
 
