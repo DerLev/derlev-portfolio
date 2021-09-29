@@ -1811,7 +1811,7 @@
     react "17.0.1"
     rxjs "^6.5.3"
 
-"@sanity/ui@>=0.36.6":
+"@sanity/ui@>=0.36.6", "@sanity/ui@^0.36.9":
   version "0.36.12"
   resolved "https://registry.npmjs.org/@sanity/ui/-/ui-0.36.12.tgz#cdc0fde42869dfe2a8fc9c7afdbcbc1cac020e6c"
   integrity sha512-BTkuBWGIf03lVUrlgLRyUwixI9uWJjsOzJx0MJeZBO7fLsbaiI+4sMZZYqWpMZrw1mh2p0+jsaoDbKlbiHwrPA==
@@ -9187,6 +9187,14 @@ sanity-plugin-media@^1.4.0:
     styled-components "^5.2.1"
     theme-ui "0.3.5"
     yup "0.32.8"
+
+sanity-plugin-note-field@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.npmjs.org/sanity-plugin-note-field/-/sanity-plugin-note-field-1.1.3.tgz#1ff51b5579ca45ab36878c52f7b9ddc8d6b4961e"
+  integrity sha512-7LhzIMtl/NrsQlrweCNHmCeDDfp2oyo6o5g8lr4QJOA6zadZ/3BQZZUWwNWaThYbs8EC+Gfm/ar02e2B8xXZPw==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    "@sanity/ui" "^0.36.9"
 
 sax@~1.2.4:
   version "1.2.4"

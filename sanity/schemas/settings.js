@@ -1,4 +1,4 @@
-import { HiOutlineCog, HiOutlineLink } from "react-icons/hi"
+import { HiOutlineCode } from "react-icons/hi"
 import React from "react"
 
 export const mainSettings = {
@@ -88,6 +88,16 @@ export const seoSettings = {
   __experimental_actions: [/*'create',*/ 'update', /*'delete',*/ 'publish'],
   type: 'document',
   fields: [
+    {
+      name: 'note',
+      type: 'note',
+      options: {
+        icon: HiOutlineCode,
+        headline: 'Still in development',
+        message: 'The SEO settings are not implemented in the frontend. Changing this would lead to nothing.',
+        tone: 'caution',
+      }
+    },
     {
       name: 'titleTemplate',
       title: 'Title Template',
