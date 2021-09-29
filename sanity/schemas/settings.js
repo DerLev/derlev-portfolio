@@ -18,12 +18,14 @@ export const mainSettings = {
         {
           name: 'description',
           title: 'Description',
-          type: 'string'
+          type: 'string',
+          validation: Rule => Rule.required(),
         },
         {
           name: 'links',
           title: 'Links',
           type: 'array',
+          validation: Rule => Rule.required(),
           options: {
             editModal: 'dialog'
           },
@@ -36,19 +38,27 @@ export const mainSettings = {
                   name: 'icon',
                   title: 'Icon',
                   type: 'string',
+                  validation: Rule => Rule.required(),
                   options: {
                     list: [
                       { value: 'faTwitter', title: 'Twitter' },
                       { value: 'faInstagram', title: 'Instagram' },
                       { value: 'faDiscord', title: 'Discord' },
-                      { value: 'faGithub', title: 'GitHub' }
+                      { value: 'faGithub', title: 'GitHub' },
+                      { value: 'faFacebook', title: 'Facebook' },
+                      { value: 'faYoutube', title: 'YouTube' },
+                      { value: 'faReddit', title: 'Reddit' },
+                      { value: 'faTwitch', title: 'Twitch' },
+                      { value: 'hiLink', title: 'Link' },
+                      { value: 'hiGlobe', title: 'Globe' },
                     ]
                   }
                 },
                 {
                   name: 'url',
                   title: 'URL',
-                  type: 'url'
+                  type: 'url',
+                  validation: Rule => Rule.required(),
                 }
               ],
               preview: {
@@ -82,17 +92,20 @@ export const seoSettings = {
       name: 'titleTemplate',
       title: 'Title Template',
       description: 'use %s for page title',
-      type: 'string'
+      type: 'string',
+      validation: Rule => Rule.required(),
     },
     {
       name: 'defaultTitle',
       title: 'Default Title',
-      type: 'string'
+      type: 'string',
+      validation: Rule => Rule.required(),
     },
     {
       name: 'defaultDescription',
       title: 'Default Description',
-      type: 'string'
+      type: 'string',
+      validation: Rule => Rule.required(),
     },
     {
       name: 'og',
@@ -105,17 +118,20 @@ export const seoSettings = {
         {
           name: 'siteName',
           title: 'Site Name',
-          type: 'string'
+          type: 'string',
+          validation: Rule => Rule.required(),
         },
         {
           name: 'defaultImage',
           title: 'Default image',
           type: 'image',
+          validation: Rule => Rule.required(),
         },
         {
           name: 'defaultImageAlt',
           title: 'Default Image Alt',
-          type: 'string'
+          type: 'string',
+          validation: Rule => Rule.required(),
         },
       ]
     }
