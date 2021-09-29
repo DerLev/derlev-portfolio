@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "node ./scripts/fetchSeo.js && next dev",
+    "build": "node ./scripts/fetchSeo.js && next build",
     "start": "cross-env PORT=8001 next start",
-    "lint": "next lint"
+    "lint": "node ./scripts/fetchSeo.js && next lint"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",

@@ -6,7 +6,7 @@ import moment from 'moment'
 import { CodeIcon } from '@heroicons/react/outline'
 import Head from 'next/head'
 import { DefaultSeo } from 'next-seo'
-import SEO from '../next-seo.config'
+import SEO from '../seo.config.json'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
