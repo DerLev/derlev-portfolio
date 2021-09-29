@@ -1,4 +1,4 @@
-import { HiOutlineCode } from "react-icons/hi"
+import { HiOutlineExclamation } from "react-icons/hi"
 import React from "react"
 
 export const mainSettings = {
@@ -92,9 +92,9 @@ export const seoSettings = {
       name: 'note',
       type: 'note',
       options: {
-        icon: HiOutlineCode,
-        headline: 'Still in development',
-        message: 'The SEO settings are not implemented in the frontend. Changing this would lead to nothing.',
+        icon: HiOutlineExclamation,
+        headline: 'Needs a rebuild',
+        message: 'Changing and publishing settings here will need a rebuild/restart of the app, in order to take affect.',
         tone: 'caution',
       }
     },
