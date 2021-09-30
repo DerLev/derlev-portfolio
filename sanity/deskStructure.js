@@ -5,7 +5,7 @@ export default () =>
   S.list()
     .title('Content')
     .items([
-      ...S.documentTypeListItems().filter(listItem => !['media.tag', 'mainSettings', 'seoSettings'].includes(listItem.getId())),
+      ...S.documentTypeListItems().filter(listItem => !['media.tag', 'mainSettings', 'seoSettings', 'linktreeSettings'].includes(listItem.getId())),
       S.divider(),
       S.listItem()
         .title('Settings')
@@ -29,6 +29,14 @@ export default () =>
                   S.editor()
                     .schemaType('seoSettings')
                     .documentId('seoSettings'),
+                ),
+              S.listItem()
+                .title('Linktree Settings')
+                .icon(HiOutlineCog)
+                .child(
+                  S.editor()
+                    .schemaType('linktreeSettings')
+                    .documentId('linktree'),
                 )
             ])
         ),
