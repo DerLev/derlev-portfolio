@@ -4,8 +4,9 @@ import Image from 'next/image'
 import avatarImg from '../assets/avatar-1024.webp'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter, faInstagram, faDiscord, faGithub, faFacebook, faYoutube, faReddit, faTwitch } from '@fortawesome/free-brands-svg-icons'
-import { LinkIcon, GlobeIcon } from '@heroicons/react/outline'
+import { LinkIcon, GlobeIcon, ChevronDoubleLeftIcon, BadgeCheckIcon } from '@heroicons/react/outline'
 import client from '../components/sanityClient'
+import Link from 'next/link'
 
 const icon = (icon:string) => {
   switch (icon) {
@@ -50,10 +51,27 @@ const Linktree: NextPage = ({ links }: InferGetStaticPropsType<typeof getStaticP
               <Image src={avatarImg} layout="responsive" />
             </div>
             <div>
-              <h1 className="text-3xl font-semibold">DerLev</h1>
+              <h1 className="text-3xl font-semibold text-center">DerLev</h1>
+              <Link href="/">
+                <a className="flex justify-center items-center gap-1 text-indigo-300 hover:text-indigo-200 transition mt-2">
+                  <ChevronDoubleLeftIcon className="w-4 h-4" />
+                  <span>Go to my portfolio</span>
+                </a>
+              </Link>
             </div>
             <div className="mt-8 w-full flex flex-col gap-2">
-              <a href="https://twitter.com/_derlev_" className="bg-indigo-500 w-full py-2 px-4 text-xl font-semibold rounded hover:bg-transparent border-2 border-indigo-500 transition flex gap-2 items-center justify-center">{icon('faTwitter')}<span>Twitter</span></a>
+              {
+                links.map((link: any) => (
+                  <a
+                    href={link.url}
+                    className="bg-indigo-500 w-full py-2 px-4 text-xl font-semibold rounded hover:bg-transparent border-2 border-indigo-500 transition duration-300 flex gap-2 items-center justify-center"
+                    key={link._key}
+                  >
+                    { icon(link.icon) }
+                    <span>{ link.title }</span>
+                  </a>
+                ))
+              }
             </div>
           </div>
         </div>
@@ -65,9 +83,15 @@ const Linktree: NextPage = ({ links }: InferGetStaticPropsType<typeof getStaticP
 export default Linktree;
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
+  const data = await client.fetch(`
+    *[_id == 'linktree']{
+      links
+    }
+  `);
+
   return {
     props: {
-      links: {}
+      links: data[0].links
     }
   }
 }
