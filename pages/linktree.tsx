@@ -92,6 +92,8 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   return {
     props: {
       links: data[0].links
-    }
+    },
+
+    revalidate: 60 * 60
   }
 }
