@@ -69,6 +69,15 @@ export const mainSettings = {
               },
             }
           ]
+        },
+        {
+          name: 'bgImage',
+          title: 'Background Image',
+          type: 'image',
+          options: {
+            hotspot: true
+          },
+          validation: Rule => Rule.required(),
         }
       ]
     }
@@ -94,7 +103,7 @@ export const seoSettings = {
       options: {
         icon: HiOutlineExclamation,
         headline: 'Needs a rebuild',
-        message: 'Changing and publishing settings here will need a rebuild/restart of the app, in order to take affect.',
+        message: <span>Changing and publishing settings here will need a rebuild/restart of the app, in order to take affect. Rebuild  on the <a href="https://dashboard.mc-mineserver.de/update/" rel="noopener noreferrer" target="_blank">API Dashboard</a> by clicking <code>Update DerLev</code>.</span>,
         tone: 'caution',
       }
     },
