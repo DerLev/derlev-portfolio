@@ -5,7 +5,7 @@ import Image from 'next/image'
 import moment from "moment"
 import BlockContent from '@sanity/block-content-to-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTwitter, faInstagram, faDiscord, faGithub } from '@fortawesome/free-brands-svg-icons'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 const weekDay = (wd:number) => {
   switch (wd) {
@@ -115,6 +115,7 @@ const BlogPost: NextPage = ({ post }: InferGetStaticPropsType<typeof getStaticPr
     <>
       <NextSeo
         title={post.title}
+        description={post.description}
         openGraph={{
           type: 'article',
           url: process.env.rootUrl + 'blog/' + post.slug.current,
@@ -234,7 +235,8 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
       },
       copyright,
       copyBy,
-      copyUrl
+      copyUrl,
+      description
     }
   `);
 
