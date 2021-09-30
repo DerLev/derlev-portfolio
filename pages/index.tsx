@@ -1,10 +1,9 @@
 import type { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next'
 import Image from 'next/image'
-import bgImg from '../assets/bg.webp'
 import { NextSeo } from 'next-seo'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter, faInstagram, faDiscord, faGithub, faFacebook, faYoutube, faReddit, faTwitch } from '@fortawesome/free-brands-svg-icons'
-import client from '../components/sanityClient'
+import client, { urlFor } from '../components/sanityClient'
 import { LinkIcon, GlobeIcon } from '@heroicons/react/outline'
 
 const icon = (icon:string) => {
@@ -43,7 +42,7 @@ const Home: NextPage = ({ page }: InferGetStaticPropsType<typeof getStaticProps>
       />
       <div className="overflow-hidden rounded-xl shadow-xl relative" style={{ height: '33rem' }}>
         <div className="absolute transform left-1/2 -translate-y-1/2 -translate-x-1/2">
-          <Image src={bgImg} width={1248} layout="fixed" alt="Snowy Mountains" />
+          <Image src={urlFor(page.bgImage).width(1248).height(1080).url()} width={1248} height={1080} layout="fixed" alt="Background Image" />
         </div>
         <div className="absolute z-10 top-0 left-0 bottom-0 right-0 p-4 flex items-center justify-center">
           <div className="text-center">
