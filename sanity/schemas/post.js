@@ -14,6 +14,12 @@ export default {
       validation: Rule => Rule.required(),
     },
     {
+      name: 'description',
+      title: 'Description',
+      type: 'string',
+      validation: Rule => Rule.required(),
+    },
+    {
       name: 'slug',
       title: 'Slug',
       description: 'URL of the post',
