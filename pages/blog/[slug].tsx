@@ -33,25 +33,25 @@ const serializers = (props: any) => {
     switch (Number(style.replace(/[^\d]/g, ''))) {
       case 1:
         return (
-          <h1 className="text-4xl font-semibold mt-1 mb-3">
+          <h1 className="text-4xl font-semibold mt-6 mb-4">
             {props.children}
           </h1>
         )
       case 2:
         return (
-          <h2 className="text-3xl font-semibold mt-1 mb-3">
+          <h2 className="text-3xl font-semibold mt-6 mb-4">
             {props.children}
           </h2>
         )
       case 3:
         return (
-          <h3 className="text-2xl font-semibold mt-1 mb-3">
+          <h3 className="text-2xl font-semibold mt-6 mb-4">
             {props.children}
           </h3>
         )
       case 4:
         return (
-          <h4 className="text-xl font-semibold mt-1 mb-2">
+          <h4 className="text-xl font-semibold mt-6 mb-3">
             {props.children}
           </h4>
         )
@@ -60,7 +60,7 @@ const serializers = (props: any) => {
 
   if(style === 'blockquote') {
     return (
-      <blockquote className="border-l-2 border-gray-500 pl-2 mb-2">
+      <blockquote className="border-l-2 border-gray-500 pl-2 mb-3">
         {props.children}
       </blockquote>
     )
@@ -68,7 +68,7 @@ const serializers = (props: any) => {
 
   if(style === 'normal') {
     return (
-      <p className="mb-2">
+      <p className="mb-3">
         {props.children}
       </p>
     )
@@ -87,7 +87,7 @@ const linkSerializer = (props: any) => {
 
 const listSerializer = (props: any) => {
   return (
-    <ul className="list-disc ml-8 mb-2">
+    <ul className="list-disc ml-8 mb-3">
       {props.children}
     </ul>
   )
@@ -102,9 +102,8 @@ const listItemSerializer = (props: any) => {
 }
 
 const imageSerializer = (props: any) => {
-  console.log(props);
   return (
-    <div className="mb-3 mt-1 shadow-md">
+    <div className="mb-4 mt-2 shadow-md">
       <Image src={urlFor(props.node.asset).width(1920).height(1080).url()} width={1920} height={1080} layout="responsive" className="rounded" alt="Image" />
     </div>
   )
@@ -150,7 +149,7 @@ const BlogPost: NextPage = ({ post }: InferGetStaticPropsType<typeof getStaticPr
           }
         </div>
       </div>
-      <article className="px-5 py-3">
+      <article className="px-5 pb-3 pt-6">
         <BlockContent blocks={post.body} serializers={{
           types: {block: serializers, image: imageSerializer},
           marks: {link: linkSerializer},
@@ -251,7 +250,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
       post: data[0]
     },
 
-    revalidate: 60 * 30
+    revalidate: 60 * 15
   }
 }
 
