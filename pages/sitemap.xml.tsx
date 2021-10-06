@@ -10,7 +10,16 @@ export const getServerSideProps = async ({ res }: any) => {
     production: "https://derlev.mc-mineserver.de",
   }[process.env.NODE_ENV];
 
-  const staticPages = await cupr.getAllFilePaths('pages').then((paths: any) => {
+  const pagesPath = () => {
+    switch (process.env.DEPLOYMENT) {
+      case 'vercel':
+        return './'
+      default:
+        return 'pages'
+    }
+  }
+
+  const staticPages = await cupr.getAllFilePaths(pagesPath).then((paths: any) => {
     var arr: string[] = []
     paths.forEach((path: string) => {
       var newPath = path
