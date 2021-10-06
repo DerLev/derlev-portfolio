@@ -55,7 +55,8 @@ const main = async () => {
   fs.writeFileSync('seo.config.json', JSON.stringify(newData));
   console.log('Done!\n');
 
-  console.log(cupr.getAllFilePaths('./'));
+  const fs = await cupr.getAllFilePaths('./');
+  console.log(fs);
 }
 
 main();
