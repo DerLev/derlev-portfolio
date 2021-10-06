@@ -11,11 +11,12 @@
     "@sanity/base",
     "@sanity/default-layout",
     "@sanity/default-login",
+    "@sanity/dashboard",
     "@sanity/desk-tool",
     "media",
     "note-field",
     "dashboard-widget-vercel",
-    "@sanity/dashboard"
+    "dashboard-widget-document-list"
   ],
   "env": {
     "development": {
