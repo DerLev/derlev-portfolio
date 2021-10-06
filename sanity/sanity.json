@@ -13,7 +13,9 @@
     "@sanity/default-login",
     "@sanity/desk-tool",
     "media",
-    "note-field"
+    "note-field",
+    "dashboard-widget-vercel",
+    "@sanity/dashboard"
   ],
   "env": {
     "development": {
@@ -34,6 +36,10 @@
     {
       "implements": "part:@sanity/base/theme/variables/override-style",
       "path": "variableOverrides.css"
+    },
+    {
+      "implements": "part:@sanity/dashboard/config",
+      "path": "dashboardConfig.js"
     }
   ]
 }

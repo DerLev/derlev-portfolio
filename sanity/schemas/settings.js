@@ -103,7 +103,7 @@ export const seoSettings = {
       options: {
         icon: HiOutlineExclamation,
         headline: 'Needs a rebuild',
-        message: <span>Changing and publishing settings here will need a rebuild/restart of the app, in order to take affect. Rebuild  on the <a href="https://derlev.mc-mineserver.de/_logs" rel="noopener noreferrer" target="_blank">Vercel Dashboard</a> by clicking the three dots to left of <code>Visit</code>, then click <code>Redeploy</code>.</span>,
+        message: <span>Changing and publishing settings here will need a rebuild/restart of the app, in order to take affect. Rebuild  on the <code>Dashboard</code> by clicking <code>Deploy derlev-portfolio</code>.</span>,
         tone: 'caution',
       }
     },
