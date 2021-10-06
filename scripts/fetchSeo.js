@@ -1,6 +1,7 @@
 const sanityClient = require('@sanity/client');
 const urlBuilder = require('@sanity/image-url');
 const fs = require('fs');
+const cupr = require('cup-readdir');
 
 const config = {
   projectId: '2m1s85es',
@@ -53,6 +54,8 @@ const main = async () => {
   console.log('Writing file ./seo.config.json');
   fs.writeFileSync('seo.config.json', JSON.stringify(newData));
   console.log('Done!\n');
+
+  console.log(cupr.getAllFilePaths('./'));
 }
 
 main();
