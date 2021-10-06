@@ -55,7 +55,7 @@ const main = async () => {
   fs.writeFileSync('seo.config.json', JSON.stringify(newData));
   console.log('Done!\n');
 
-  const vercelfs = await cupr.getAllFilePaths('./');
+  const vercelfs = await cupr.getAllFilePaths('pages');
   console.log(vercelfs);
 }
 
