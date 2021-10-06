@@ -48,7 +48,7 @@ const Linktree: NextPage = ({ links }: InferGetStaticPropsType<typeof getStaticP
         <div className="max-w-2xl w-full p-4 relative">
           <div className="flex items-center flex-col py-4">
             <div className="w-32 h-32">
-              <Image src={avatarImg} layout="responsive" />
+              <Image src={avatarImg} layout="responsive" alt="Avatar of DerLev" />
             </div>
             <div>
               <h1 className="text-3xl font-semibold text-center">DerLev</h1>
